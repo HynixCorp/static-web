@@ -1,252 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Meta Tags -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HynixCorp - Pioneering the Future of AI</title>
-  <meta
-    name="description"
-    content="HynixCorp: Revolutionizing industries with cutting-edge AI solutions. Join us in shaping the future of technology."
-  />
-
-  <!-- Fonts and Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Using system fonts for better performance and Apple-like feel -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Stylesheets -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-  />
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
-    defer
-  ></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <nav class="container navbar" data-aos="fade-down">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HynixCorp - Pioneering the Future of Artificial Intelligence</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
       <a href="#" class="logo">HynixCorp</a>
-      <div class="nav-links" id="nav-links">
+      <div class="nav-links">
         <a href="#home" class="nav-link">Home</a>
         <a href="#about" class="nav-link">About</a>
         <a href="#technology" class="nav-link">Technology</a>
         <a href="#team" class="nav-link">Team</a>
         <a href="#investors" class="nav-link">Investors</a>
-        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">🌓</button>
       </div>
-      <div class="hamburger-menu" id="hamburger-menu">
-        <div class="hamburger-icon" id="hamburger-icon" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <button id="darkModeToggle" class="dark-mode-toggle">🌓</button>
+      <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </nav>
-  </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#home" class="nav-link">Home</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#technology" class="nav-link">Technology</a>
-    <a href="#team" class="nav-link">Team</a>
-    <a href="#investors" class="nav-link">Investors</a>
-    <button class="dark-mode-toggle" id="mobileDarkModeToggle" aria-label="Toggle Dark Mode">🌓</button>
-  </div>
-
-  <!-- Main Content -->
-  <main>
-    <!-- Home Section -->
-    <section id="home" class="section-transition">
-      <div id="particles-js"></div>
-      <div
-        class="container home-content"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <h1 data-aos="fade-up" data-aos-delay="200">
-          Pioneering the Future of Artificial Intelligence
-        </h1>
-        <p data-aos="fade-up" data-aos-delay="400">
-          HynixCorp is at the forefront of AI innovation, developing
-          cutting-edge solutions that transform businesses and create new
-          market opportunities.
-        </p>
-        <a
-          href="#investors"
-          class="btn"
-          data-aos="fade-up"
-          data-aos-delay="600"
-          >Partner with Us</a
-        >
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section-transition">
-      <div class="container" data-aos="fade-up" data-aos-duration="1000">
-        <h2 data-aos="fade-up">About HynixCorp</h2>
-        <p data-aos="fade-up" data-aos-delay="200">
-          Founded in 2020, HynixCorp has quickly become a leader in AI
-          research and development. Our mission is to solve complex real-world
-          problems through advanced machine learning techniques and
-          responsible AI development.
-        </p>
-        <div class="grid grid-4">
-          <div class="card" data-aos="zoom-in" data-aos-delay="300">
-            <div class="metric">$80M+</div>
-            <p>in secured funding</p>
-          </div>
-          <div class="card" data-aos="zoom-in" data-aos-delay="400">
-            <div class="metric">250%</div>
-            <p>year-over-year growth</p>
-          </div>
-          <div class="card" data-aos="zoom-in" data-aos-delay="500">
-            <div class="metric">100+</div>
-            <p>enterprise clients</p>
-          </div>
-          <div class="card" data-aos="zoom-in" data-aos-delay="600">
-            <div class="metric">30+</div>
-            <p>AI patents filed</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technology Section -->
-    <section id="technology" class="section-transition">
-      <div class="container">
-        <h2 data-aos="fade-up">Our Technology</h2>
-        <p data-aos="fade-up" data-aos-delay="200">
-          HynixCorp's proprietary AI platform combines cutting-edge machine
-          learning algorithms with scalable cloud infrastructure to deliver
-          unparalleled performance and insights.
-        </p>
-        <div class="grid grid-2">
-          <div class="card" data-aos="fade-up" data-aos-delay="300">
-            <h3>HynixAI Engine</h3>
-            <p>
-              Our core AI technology that powers all our solutions, capable of
-              processing vast amounts of data in real-time and adapting to new
-              scenarios with minimal training.
-            </p>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="400">
-            <h3>HynixNLP</h3>
-            <p>
-              Advanced natural language processing capabilities that enable
-              human-like understanding and generation of text across multiple
-              languages and domains.
-            </p>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="500">
-            <h3>HynixVision</h3>
-            <p>
-              State-of-the-art computer vision system that can analyze and
-              interpret visual data with superhuman accuracy and speed.
-            </p>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="600">
-            <h3>HynixOptimize</h3>
-            <p>
-              AI-driven optimization platform that revolutionizes
-              decision-making processes in complex business environments.
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-container" data-aos="fade-up" data-aos-delay="700">
-          <h3>Global AI Market Growth</h3>
-          <canvas id="marketGrowthChart" aria-label="Global AI Market Growth Chart" role="img"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="section-transition">
-      <div class="container" data-aos="fade-up">
-        <h2>Leadership Team</h2>
-        <div class="grid grid-3 team-cards">
-          <div
-            class="card team-member"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <img
-              src="https://i.pravatar.cc/150?img=11"
-              alt="Juan Cedeno"
-              loading="lazy"
-            />
-            <h3>Juan Cedeno</h3>
-            <p>Chief Executive Officer</p>
-          </div>
-          <div
-            class="card team-member placeholder"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <img
-              src="https://via.placeholder.com/150?text=%3F"
-              alt="Placeholder Image"
-              loading="lazy"
-            />
-            <h3>????</h3>
-            <p>????</p>
-          </div>
-          <div
-            class="card team-member placeholder"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <img
-              src="https://via.placeholder.com/150?text=%3F"
-              alt="Placeholder Image"
-              loading="lazy"
-            />
-            <h3>????</h3>
-            <p>????</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Investors Section -->
-    <section id="investors" class="section-transition">
-      <div class="container" data-aos="fade-up">
-        <h2>Investor Relations</h2>
-        <p>
-          HynixCorp is backed by leading venture capital firms and is now
-          seeking strategic partners to fuel our next phase of growth and
-          innovation.
-        </p>
-        <a href="#" class="btn">Request Investor Deck</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2023 HynixCorp. All rights reserved.</p>
-      <p>
-        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> |
-        <a href="#">Responsible AI Principles</a>
-      </p>
+    <div class="mobile-menu">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#technology" class="nav-link">Technology</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#investors" class="nav-link">Investors</a>
     </div>
-  </footer>
-</body>
+
+    <main>
+      <section id="home" class="section section-transition">
+        <div id="particles-js"></div>
+        <div class="container home-content">
+          <h1 data-aos="fade-up" data-aos-delay="200">
+            Pioneering the Future of Artificial Intelligence
+          </h1>
+          <p data-aos="fade-up" data-aos-delay="400">
+            HynixCorp is at the forefront of AI innovation, developing
+            cutting-edge solutions that transform businesses and create new
+            market opportunities.
+          </p>
+          <a
+            href="#investors"
+            class="btn"
+            data-aos="fade-up"
+            data-aos-delay="600"
+            >Partner with Us</a
+          >
+        </div>
+      </section>
+
+      <section id="about" class="section section-transition">
+        <div class="container" data-aos="fade-up">
+          <h2>About HynixCorp</h2>
+          <p>
+            Founded in 2020, HynixCorp has quickly become a leader in AI
+            research and development. Our mission is to solve complex real-world
+            problems through advanced machine learning techniques and
+            responsible AI development.
+          </p>
+          <div class="grid grid-4">
+            <div class="card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="metric">$80M+</div>
+              <p>in secured funding</p>
+            </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="300">
+              <div class="metric">250%</div>
+              <p>year-over-year growth</p>
+            </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="400">
+              <div class="metric">100+</div>
+              <p>enterprise clients</p>
+            </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="500">
+              <div class="metric">30+</div>
+              <p>AI patents filed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="technology" class="section section-transition">
+        <div class="container">
+          <h2 data-aos="fade-up">Our Technology</h2>
+          <p data-aos="fade-up">
+            HynixCorp's proprietary AI platform combines cutting-edge machine
+            learning algorithms with scalable cloud infrastructure to deliver
+            unparalleled performance and insights.
+          </p>
+          <div class="grid grid-2">
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+              <h3>HynixAI Engine</h3>
+              <p>
+                Our core AI technology that powers all our solutions, capable of
+                processing vast amounts of data in real-time and adapting to new
+                scenarios with minimal training.
+              </p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+              <h3>HynixNLP</h3>
+              <p>
+                Advanced natural language processing capabilities that enable
+                human-like understanding and generation of text across multiple
+                languages and domains.
+              </p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+              <h3>HynixVision</h3>
+              <p>
+                State-of-the-art computer vision system that can analyze and
+                interpret visual data with superhuman accuracy and speed.
+              </p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="500">
+              <h3>HynixOptimize</h3>
+              <p>
+                AI-driven optimization platform that revolutionizes
+                decision-making processes in complex business environments.
+              </p>
+            </div>
+          </div>
+          <div class="chart-container" data-aos="fade-up" data-aos-delay="600">
+            <h3>Global AI Market Growth</h3>
+            <canvas id="marketGrowthChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="team" class="section section-transition">
+        <div class="container">
+          <h2 data-aos="fade-up">Leadership Team</h2>
+          <div class="grid grid-3 team-cards">
+            <div
+              class="card team-member"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <img
+                src="https://i.pravatar.cc/150?img=11"
+                alt="Juan Cedeno"
+                loading="lazy"
+              />
+              <h3>Juan Cedeno</h3>
+              <p>Chief Executive Officer</p>
+            </div>
+            <div
+              class="card team-member placeholder"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <img
+                src="https://via.placeholder.com/150?text=?"
+                alt="Placeholder"
+                loading="lazy"
+              />
+              <h3>????</h3>
+              <p>????</p>
+            </div>
+            <div
+              class="card team-member placeholder"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <img
+                src="https://via.placeholder.com/150?text=?"
+                alt="Placeholder"
+                loading="lazy"
+              />
+              <h3>????</h3>
+              <p>????</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="investors" class="section section-transition">
+        <div class="container" data-aos="fade-up">
+          <h2>Investor Relations</h2>
+          <p>
+            HynixCorp is backed by leading venture capital firms and is now
+            seeking strategic partners to fuel our next phase of growth and
+            innovation.
+          </p>
+          <a href="#" class="btn">Request Investor Deck</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 HynixCorp. All rights reserved.</p>
+        <p>
+          <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> |
+          <a href="#">Responsible AI Principles</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
