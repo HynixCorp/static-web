@@ -1,191 +1,230 @@
 /* General Styles */
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: #000;
-    background-color: #fff;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .section-transition {
-    padding: 60px 0;
-  }
-  
-  /* Apple-like Navbar */
-  .apple-navbar {
-    position: fixed;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-  }
-  
+  margin: 0;
+  font-family: 'Merriweather', serif;
+  color: #000;
+  background-color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.section-transition {
+  padding: 80px 0;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links .nav-link {
+  margin-left: 25px;
+  font-weight: 400;
+  color: #000;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+}
+
+.dark-mode-toggle {
+  margin-left: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* Cards */
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 25px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Team Cards */
+.team-cards .card {
+  text-align: center;
+}
+
+.team-cards .card img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.placeholder img {
+  opacity: 0.2;
+}
+
+.placeholder h3,
+.placeholder p {
+  opacity: 0.2;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #333;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 30px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Home Section */
+.home-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #000;
+  padding-top: 100px;
+}
+
+.home-content h1 {
+  font-size: 56px;
+  margin-bottom: 30px;
+}
+
+.home-content p {
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 80px;
+}
+
+.chart-container h3 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+footer {
+  background-color: #f8f8f8;
+  padding: 30px 0;
+}
+
+footer p {
+  text-align: center;
+  margin: 5px 0;
+}
+
+footer a {
+  color: #000;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .nav-links {
-    display: flex;
-    align-items: center;
+    display: none;
   }
-  
-  .nav-links .nav-link {
-    margin-left: 20px;
-    font-weight: 500;
-    color: #000;
+
+  .hamburger-menu {
+    display: block;
   }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
-  }
-  
-  .dark-mode-toggle {
-    margin-left: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  /* Apple-like Cards */
-  .apple-cards .card {
-    border-radius: 12px;
-    background: #f8f8f8;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s ease;
-    text-align: center;
-  }
-  
-  .apple-cards .card:hover {
-    transform: scale(1.02);
-  }
-  
-  .apple-cards .card img {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .placeholder img {
-    opacity: 0.5;
-  }
-  
-  .placeholder h3,
-  .placeholder p {
-    opacity: 0.5;
-  }
-  
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #0071e3;
-    color: #fff;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Grid */
-  .grid {
-    display: grid;
-    gap: 20px;
-  }
-  
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
+
+  .grid-2,
+  .grid-3,
   .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
   }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-  
-    .hamburger-menu {
-      display: block;
-    }
-  
-    .grid-2,
-    .grid-3,
-    .grid-4 {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  /* Additional Styles */
-  .home-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: #000;
-  }
-  
+
   .home-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 36px;
   }
-  
+
   .home-content p {
     font-size: 18px;
-    margin-bottom: 40px;
   }
-  
-  .chart-container {
-    margin-top: 60px;
-  }
-  
-  /* Dark Mode */
-  body.dark-mode {
-    background-color: #000;
-    color: #fff;
-  }
-  
-  body.dark-mode .apple-navbar {
-    background: rgba(0, 0, 0, 0.7);
-  }
-  
-  body.dark-mode .nav-links .nav-link,
-  body.dark-mode .logo {
-    color: #fff;
-  }
-  
-  body.dark-mode .apple-cards .card {
-    background: #1c1c1e;
-    color: #fff;
-  }
-  
-  body.dark-mode .btn {
-    background-color: #0a84ff;
-  }
-  
-  body.dark-mode .btn:hover {
-    background-color: #0066cc;
-  }
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+body.dark-mode .navbar {
+  background-color: #000;
+  border-bottom: 1px solid #444;
+}
+
+body.dark-mode .nav-links .nav-link,
+body.dark-mode .logo {
+  color: #fff;
+}
+
+body.dark-mode .card {
+  background-color: #121212;
+  border: 1px solid #444;
+  color: #fff;
+}
+
+body.dark-mode .btn {
+  background-color: #fff;
+  color: #000;
+}
+
+body.dark-mode .btn:hover {
+  background-color: #ccc;
+}
+
+body.dark-mode footer {
+  background-color: #121212;
+}
+
+body.dark-mode footer a {
+  color: #fff;
+}
