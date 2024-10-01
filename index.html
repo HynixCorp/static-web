@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HynixCorp - Pioneering the Future of AI</title>
@@ -8,37 +9,47 @@
     name="description"
     content="HynixCorp: Revolutionizing industries with cutting-edge AI solutions. Join us in shaping the future of technology."
   />
+
+  <!-- Fonts and Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Using a formal serif font -->
+  <!-- Using system fonts for better performance and Apple-like feel -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
     rel="stylesheet"
   />
+
+  <!-- Stylesheets -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
   />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
+    defer
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <nav class="container navbar" data-aos="fade-down">
       <a href="#" class="logo">HynixCorp</a>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="#home" class="nav-link">Home</a>
         <a href="#about" class="nav-link">About</a>
         <a href="#technology" class="nav-link">Technology</a>
         <a href="#team" class="nav-link">Team</a>
         <a href="#investors" class="nav-link">Investors</a>
-        <button class="dark-mode-toggle" id="darkModeToggle">🌓</button>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">🌓</button>
       </div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" id="hamburger-icon">
+      <div class="hamburger-menu" id="hamburger-menu">
+        <div class="hamburger-icon" id="hamburger-icon" aria-label="Toggle Menu">
           <span></span>
           <span></span>
           <span></span>
@@ -47,15 +58,17 @@
     </nav>
   </header>
 
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
     <a href="#home" class="nav-link">Home</a>
     <a href="#about" class="nav-link">About</a>
     <a href="#technology" class="nav-link">Technology</a>
     <a href="#team" class="nav-link">Team</a>
     <a href="#investors" class="nav-link">Investors</a>
-    <button class="dark-mode-toggle">🌓</button>
+    <button class="dark-mode-toggle" id="mobileDarkModeToggle" aria-label="Toggle Dark Mode">🌓</button>
   </div>
 
+  <!-- Main Content -->
   <main>
     <!-- Home Section -->
     <section id="home" class="section-transition">
@@ -158,7 +171,7 @@
 
         <div class="chart-container" data-aos="fade-up" data-aos-delay="700">
           <h3>Global AI Market Growth</h3>
-          <canvas id="marketGrowthChart"></canvas>
+          <canvas id="marketGrowthChart" aria-label="Global AI Market Growth Chart" role="img"></canvas>
         </div>
       </div>
     </section>
@@ -188,7 +201,7 @@
           >
             <img
               src="https://via.placeholder.com/150?text=%3F"
-              alt="?"
+              alt="Placeholder Image"
               loading="lazy"
             />
             <h3>????</h3>
@@ -201,7 +214,7 @@
           >
             <img
               src="https://via.placeholder.com/150?text=%3F"
-              alt="?"
+              alt="Placeholder Image"
               loading="lazy"
             />
             <h3>????</h3>
@@ -225,6 +238,7 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
       <p>&copy; 2023 HynixCorp. All rights reserved.</p>
