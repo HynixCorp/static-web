@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check for saved dark mode preference
   if (localStorage.getItem("darkMode") === "true") {
     body.classList.add("dark-mode");
-    updateChartColors();
   }
 
   // Smooth scrolling for anchor links
@@ -153,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             font: { family: "'Roboto', sans-serif", size: 14 },
             color: "#555",
             callback: function (value) {
-              return "$" + value;
+              return "$" + value + "B";
             },
           },
         },
@@ -180,4 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     chart.update();
   }
+
+  // Initial chart color update
+  updateChartColors();
 });
