@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friday: The Future of Digital Interaction</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Updated Three.js to the latest version -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -14,6 +15,8 @@
             font-family: 'Poppins', sans-serif;
             color: #fff;
             background-color: #000;
+            width: 100%;
+            height: 100%;
         }
 
         #threeJsCanvas {
@@ -23,6 +26,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            background-color: #000; /* Ensure canvas has a black background */
         }
 
         #slideContainer {
@@ -30,6 +34,7 @@
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
             position: relative;
+            z-index: 1; /* Ensure it's above the canvas */
         }
 
         .slide {
@@ -45,19 +50,19 @@
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             margin-bottom: 0.5em;
             text-align: center;
         }
 
         h2 {
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 0.5em;
             text-align: center;
         }
 
         p {
-            font-size: 1.2em;
+            font-size: 1em;
             line-height: 1.6;
             text-align: center;
             max-width: 800px;
@@ -82,7 +87,7 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 20px;
             max-width: 800px;
             width: 90%;
@@ -108,7 +113,7 @@
 
         #scrollHint {
             position: fixed;
-            bottom: 40px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 30px;
@@ -133,6 +138,51 @@
         @keyframes scrollAnimation {
             0% { opacity: 1; transform: translateX(-50%) translateY(0); }
             100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1.2em;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .slide {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            #scrollHint {
+                bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -262,34 +312,83 @@
         // Three.js scene setup
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeJsCanvas'), antialias: true });
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeJsCanvas'), antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 1); // Set background color to black
 
         // Create particles
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
+        const particlesCount = 2000; // Reduced for better performance
         const posArray = new Float32Array(particlesCount * 3);
+        const velocityArray = new Float32Array(particlesCount * 3);
 
         for (let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 5;
+            posArray[i] = (Math.random() - 0.5) * 10;
+            velocityArray[i] = (Math.random() - 0.5) * 0.01;
         }
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocityArray, 3));
 
         const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: 0x3498db
+            size: 0.05, // Increased size for better visibility
+            color: 0x3498db,
+            transparent: true,
+            opacity: 0.9, // Increased opacity
+            blending: THREE.NormalBlending // Changed blending mode
         });
 
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particlesMesh);
 
-        camera.position.z = 2;
+        camera.position.z = 5; // Positioned the camera
+
+        // Mouse interaction
+        const mouse = new THREE.Vector2();
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
 
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
-            particlesMesh.rotation.y += 0.001;
+
+            const positions = particlesGeometry.attributes.position.array;
+            const velocities = particlesGeometry.attributes.velocity.array;
+
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                // Update position based on velocity
+                positions[i] += velocities[i];
+                positions[i + 1] += velocities[i + 1];
+                positions[i + 2] += velocities[i + 2];
+
+                // Boundary check and reset
+                if (Math.abs(positions[i]) > 5) velocities[i] *= -1;
+                if (Math.abs(positions[i + 1]) > 5) velocities[i + 1] *= -1;
+                if (Math.abs(positions[i + 2]) > 5) velocities[i + 2] *= -1;
+
+                // Mouse interaction
+                const dx = mouse.x * 5 - positions[i];
+                const dy = mouse.y * 5 - positions[i + 1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 0.5) {
+                    velocities[i] += dx * 0.001;
+                    velocities[i + 1] += dy * 0.001;
+                }
+
+                // Add some randomness to movement
+                velocities[i] += (Math.random() - 0.5) * 0.0002;
+                velocities[i + 1] += (Math.random() - 0.5) * 0.0002;
+                velocities[i + 2] += (Math.random() - 0.5) * 0.0002;
+            }
+
+            particlesGeometry.attributes.position.needsUpdate = true;
+
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += 0.0002;
+
             renderer.render(scene, camera);
         }
         animate();
