@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friday: The Future of Digital Interaction</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Updated Three.js to the latest version -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
     <style>
         body, html {
@@ -26,7 +25,6 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-color: #000; /* Ensure canvas has a black background */
         }
 
         #slideContainer {
@@ -34,35 +32,32 @@
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
             position: relative;
-            z-index: 1; /* Ensure it's above the canvas */
+            z-index: 1;
+            padding-bottom: 60px;
+            padding-left: 60px;
         }
 
         .slide {
-            height: 100vh;
+            min-height: 100vh;
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            padding-left: 60px;
             box-sizing: border-box;
             background-color: rgba(0, 0, 0, 0.5);
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 1.8em;
+            font-size: 3em;
             margin-bottom: 0.5em;
             text-align: center;
         }
 
         p {
-            font-size: 1em;
+            font-size: 1.2em;
             line-height: 1.6;
             text-align: center;
             max-width: 800px;
@@ -73,12 +68,13 @@
             display: inline-block;
             background-color: #3498db;
             color: #fff;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 30px;
             text-decoration: none;
             margin-top: 20px;
             transition: background-color 0.3s;
             font-weight: 600;
+            font-size: 1.1em;
         }
 
         .button:hover {
@@ -87,9 +83,9 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
-            max-width: 800px;
+            max-width: 900px;
             width: 90%;
         }
 
@@ -109,70 +105,53 @@
         .product-card h3 {
             margin-top: 0;
             color: #3498db;
+            font-size: 1.4em;
+        }
+
+        .product-card p {
+            font-size: 1em;
         }
 
         #scrollHint {
             position: fixed;
-            bottom: 20px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 50px;
-            border: 2px solid #fff;
-            border-radius: 15px;
-        }
-
-        #scrollHint::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
             width: 8px;
             height: 8px;
             background-color: #fff;
             border-radius: 50%;
-            transform: translateX(-50%);
             animation: scrollAnimation 2s infinite;
         }
 
         @keyframes scrollAnimation {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            0% { opacity: 1; transform: translate(-50%, 20px); }
+            100% { opacity: 0; transform: translate(-50%, 0); }
         }
 
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 3em;
-            }
-
-            h2 {
-                font-size: 2em;
-            }
-
-            p {
-                font-size: 1.2em;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        #logo {
+            position: fixed;
+            top: 20px;
+            left: 40px;
+            font-size: 2.5em;
+            font-weight: 600;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+            transition: color 0.5s ease;
         }
 
         @media (max-width: 767px) {
-            .slide {
-                padding: 10px;
+            #slideContainer, .slide {
+                padding-left: 20px;
             }
 
             h1 {
-                font-size: 2em;
-            }
-
-            h2 {
-                font-size: 1.5em;
+                font-size: 2.2em;
             }
 
             p {
-                font-size: 0.9em;
+                font-size: 1em;
             }
 
             .button {
@@ -181,12 +160,36 @@
             }
 
             #scrollHint {
-                bottom: 10px;
+                bottom: 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .product-card {
+                padding: 15px;
+            }
+
+            .product-card h3 {
+                font-size: 1.2em;
+            }
+
+            .product-card p {
+                font-size: 0.9em;
+            }
+
+            #logo {
+                font-size: 2em;
+                top: 15px;
+                left: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div id="logo">Friday</div>
     <canvas id="threeJsCanvas"></canvas>
 
     <div id="slideContainer">
@@ -309,16 +312,14 @@
     <div id="scrollHint"></div>
 
     <script>
-        // Three.js scene setup
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeJsCanvas'), antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 1); // Set background color to black
+        renderer.setClearColor(0x000000, 1);
 
-        // Create particles
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 2000; // Reduced for better performance
+        const particlesCount = 2000;
         const posArray = new Float32Array(particlesCount * 3);
         const velocityArray = new Float32Array(particlesCount * 3);
 
@@ -331,26 +332,24 @@
         particlesGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocityArray, 3));
 
         const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.05, // Increased size for better visibility
+            size: 0.05,
             color: 0x3498db,
             transparent: true,
-            opacity: 0.9, // Increased opacity
-            blending: THREE.NormalBlending // Changed blending mode
+            opacity: 0.9,
+            blending: THREE.NormalBlending
         });
 
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particlesMesh);
 
-        camera.position.z = 5; // Positioned the camera
+        camera.position.z = 5;
 
-        // Mouse interaction
         const mouse = new THREE.Vector2();
         window.addEventListener('mousemove', (event) => {
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
         });
 
-        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
 
@@ -358,17 +357,14 @@
             const velocities = particlesGeometry.attributes.velocity.array;
 
             for (let i = 0; i < particlesCount * 3; i += 3) {
-                // Update position based on velocity
                 positions[i] += velocities[i];
                 positions[i + 1] += velocities[i + 1];
                 positions[i + 2] += velocities[i + 2];
 
-                // Boundary check and reset
                 if (Math.abs(positions[i]) > 5) velocities[i] *= -1;
                 if (Math.abs(positions[i + 1]) > 5) velocities[i + 1] *= -1;
                 if (Math.abs(positions[i + 2]) > 5) velocities[i + 2] *= -1;
 
-                // Mouse interaction
                 const dx = mouse.x * 5 - positions[i];
                 const dy = mouse.y * 5 - positions[i + 1];
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -378,7 +374,6 @@
                     velocities[i + 1] += dy * 0.001;
                 }
 
-                // Add some randomness to movement
                 velocities[i] += (Math.random() - 0.5) * 0.0002;
                 velocities[i + 1] += (Math.random() - 0.5) * 0.0002;
                 velocities[i + 2] += (Math.random() - 0.5) * 0.0002;
@@ -393,7 +388,6 @@
         }
         animate();
 
-        // Scroll hint visibility and animation
         const scrollHint = document.getElementById('scrollHint');
         const slideContainer = document.getElementById('slideContainer');
         const slides = document.querySelectorAll('.slide');
@@ -404,12 +398,38 @@
             scrollHint.style.opacity = currentSlide === totalSlides ? '0' : '1';
         });
 
-        // Handle window resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        const logo = document.getElementById('logo');
+        const coolColors = [
+            '#3498db', // Blue
+            '#2ecc71', // Green
+            '#9b59b6', // Purple
+            '#1abc9c', // Turquoise
+            '#34495e', // Dark Blue
+            '#16a085', // Green Sea
+            '#2980b9', // Belize Hole
+            '#8e44ad', // Wisteria
+            '#2c3e50', // Midnight Blue
+            '#1abc9c'  // Turquoise
+        ];
+
+        function changeLogoColor() {
+            const randomColor = coolColors[Math.floor(Math.random() * coolColors.length)];
+            logo.style.color = 'white';
+            setTimeout(() => {
+                logo.style.color = randomColor;
+            }, 100);
+
+            const nextChangeTime = Math.random() * 3000 + 2000; // Random time between 2-5 seconds
+            setTimeout(changeLogoColor, nextChangeTime);
+        }
+
+        window.addEventListener('load', changeLogoColor);
     </script>
 </body>
 </html>
