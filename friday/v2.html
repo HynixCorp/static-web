@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday: The Future of Digital Interaction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            background-color: #000;
+            width: 100%;
+            height: 100%;
+        }
+
+        #threeJsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #slideContainer {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fff, #000, #fff);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 1em;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, #333, #666);
+            color: #fff;
+            padding: 14px 28px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: 1px solid #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            width: 90%;
+        }
+
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateY(-100%);
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.4em;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .product-card p {
+            font-size: 1em;
+        }
+
+        #logo {
+            position: fixed;
+            top: 20px;
+            left: 40px;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 3px;
+        }
+
+        #scrollHint {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: scrollAnimation 2s infinite;
+        }
+
+        @keyframes scrollAnimation {
+            0% { opacity: 1; transform: translate(-50%, 20px); }
+            100% { opacity: 0; transform: translate(-50%, 0); }
+        }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            #scrollHint {
+                bottom: 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .product-card {
+                padding: 15px;
+            }
+
+            .product-card h3 {
+                font-size: 1.2em;
+            }
+
+            .product-card p {
+                font-size: 0.9em;
+            }
+
+            #logo {
+                font-size: 2em;
+                top: 15px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">FRIDAY</div>
+    <canvas id="threeJsCanvas"></canvas>
+
+    <div id="slideContainer">
+        <div class="slide">
+            <h1>Welcome to Friday</h1>
+            <p>Step Into the Future with Intelligent Assistance</p>
+            <a href="http://itsfriday.app" class="button">Learn More</a>
+        </div>
+        <div class="slide">
+            <h1>Our Vision: Beyond the Horizon</h1>
+            <p>Imagine a world where your digital life doesn't just coexist—it cooperates, empowers, and anticipates.</p>
+            <p>Our goal: Launch one thrilling application every month, for 13 exciting months!</p>
+        </div>
+        <div class="slide">
+            <h1>Why the World Needs Friday</h1>
+            <p>Tech should feel like a helpful friend, not an overwhelming flood.</p>
+            <p>We promise to transform chaos into harmony—improving time, efficiency, and user joy with intelligence-driven solutions.</p>
+        </div>
+        <div class="slide">
+            <h1>Friday's Secret Sauce</h1>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Unifying Magic</h3>
+                    <p>A harmonious suite that turns the scattered pieces of life into a seamless symphony.</p>
+                </div>
+                <div class="product-card">
+                    <h3>Tailored Solutions</h3>
+                    <p>Whether it's supercharging creativity or nailing down cash flow, we've got you covered.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>Meet the MVPs</h1>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>chat.itsfriday.app</h3>
+                    <p>Your hub for mastering videos, auto-dubbing, and productive research adventures.</p>
+                </div>
+                <div class="product-card">
+                    <h3>namethat.film</h3>
+                    <p>Never forget a movie again with our ingenious visual sleuth.</p>
+                </div>
+                <div class="product-card">
+                    <h3>clips.itsfriday.app</h3>
+                    <p>Gamers, rejoice! Automatically capture golden moments on Twitch.</p>
+                </div>
+                <div class="product-card">
+                    <h3>cc.itsfriday.app</h3>
+                    <p>Cross-platform communication like never before.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>Diving Deeper into Innovation</h1>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>board.itsfriday.app</h3>
+                    <p>Your whiteboard, with a cognitive brain.</p>
+                </div>
+                <div class="product-card">
+                    <h3>books.itsfriday.app</h3>
+                    <p>Unleash your inner bookworm with smart tracking and AI-sourced suggestions.</p>
+                </div>
+                <div class="product-card">
+                    <h3>research.itsfriday.app</h3>
+                    <p>Demystify your search for knowledge with clairvoyant insights.</p>
+                </div>
+                <div class="product-card">
+                    <h3>editor.itsfriday.app</h3>
+                    <p>Harness the artistic muse with intelligence-rich image tools.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>Everyday Adventures</h1>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>cook.itsfriday.app</h3>
+                    <p>Connect to culinary genius in your kitchen.</p>
+                </div>
+                <div class="product-card">
+                    <h3>fit.itsfriday.app</h3>
+                    <p>Fitness not just tracked, but creatively coaxed into perfection.</p>
+                </div>
+                <div class="product-card">
+                    <h3>notes.itsfriday.app</h3>
+                    <p>Every note reveals deeper insights into your cognitive journey.</p>
+                </div>
+                <div class="product-card">
+                    <h3>babel.itsfriday.app</h3>
+                    <p>Journey into new languages at your own pace.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>Special Tricks Up Our Sleeve</h1>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>start.itsfriday.app</h3>
+                    <p>Uncomplicate starting up—domains, legal, deployment, and beyond.</p>
+                </div>
+                <div class="product-card">
+                    <h3>money.itsfriday.app (Monè App)</h3>
+                    <p>From expense tracking to full-fledged banking brilliance.</p>
+                </div>
+                <div class="product-card">
+                    <h3>infra.itsfriday.app</h3>
+                    <p>Building blocks that accelerate project launches.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>The Big Picture</h1>
+            <p>With Friday, we don't just dream of digital ease—we turn it into reality, intelligently and with flair.</p>
+            <p>Join us in reshaping the digital landscape, one app at a time.</p>
+            <a href="mailto:contact@itsfriday.app" class="button">Contact Us</a>
+        </div>
+    </div>
+
+    <div id="scrollHint"></div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeJsCanvas'), antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 1);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+        const velocityArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+            velocityArray[i] = (Math.random() - 0.5) * 0.01;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocityArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 5;
+
+        const mouse = new THREE.Vector2();
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const positions = particlesGeometry.attributes.position.array;
+            const velocities = particlesGeometry.attributes.velocity.array;
+
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                positions[i] += velocities[i];
+                positions[i + 1] += velocities[i + 1];
+                positions[i + 2] += velocities[i + 2];
+
+                if (Math.abs(positions[i]) > 5) velocities[i] *= -1;
+                if (Math.abs(positions[i + 1]) > 5) velocities[i + 1] *= -1;
+                if (Math.abs(positions[i + 2]) > 5) velocities[i + 2] *= -1;
+
+                const dx = mouse.x * 5 - positions[i];
+                const dy = mouse.y * 5 - positions[i + 1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 0.5) {
+                    velocities[i] += dx * 0.001;
+                    velocities[i + 1] += dy * 0.001;
+                }
+
+                velocities[i] += (Math.random() - 0.5) * 0.0002;
+                velocities[i + 1] += (Math.random() - 0.5) * 0.0002;
+                velocities[i + 2] += (Math.random() - 0.5) * 0.0002;
+            }
+
+            particlesGeometry.attributes.position.needsUpdate = true;
+
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += 0.0002;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        const scrollHint = document.getElementById('scrollHint');
+        const slideContainer = document.getElementById('slideContainer');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        slideContainer.addEventListener('scroll', () => {
+            const currentSlide = Math.floor(slideContainer.scrollTop / window.innerHeight) + 1;
+            scrollHint.style.opacity = currentSlide === totalSlides ? '0' : '1';
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
